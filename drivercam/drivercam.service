@@ -1,0 +1,14 @@
+[Unit]
+Description=Driver Camera RTSP Stream
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/cvlc v4l2:///dev/video0:chroma=h264:width=848:height=480 --sout '#rtp{sdp=rtsp://localhost:5800/driver}'
+WorkingDirectory=/home/pi/drivercam
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
